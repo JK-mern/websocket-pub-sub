@@ -1,0 +1,20 @@
+{
+  "name": "websocket-pub-sub",
+  "version": "1.0.0",
+  "description": "An example implementation on how to avoid sticky connections in websocket by using redis pub sub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc -b && node dist/index.js"
+  },
+  "author": "jayakrishnan s",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^5.0.2",
+    "@types/ws": "^8.18.1",
+    "express": "^5.1.0",
+    "redis": "^5.0.1",
+    "uuid": "^11.1.0",
+    "ws": "^8.18.2"
+  }
+}

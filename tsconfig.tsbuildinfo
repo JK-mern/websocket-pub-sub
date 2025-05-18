@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/Rooms/RoomMangament.ts","./src/Websocket/socketHandler.ts","./src/types/socketdata.ts","./src/types/users.ts"],"version":"5.8.3"}
