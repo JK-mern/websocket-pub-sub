@@ -56,6 +56,19 @@ npm run dev
 
 Connect to `ws://localhost:5000` and send messages in the following JSON format:
 
+
+
+### Socket Event Handlers
+
+- `joinRoom`: Add a user to a room and notify others.
+- `createRoom`: Create a new room and add the user as the first member.
+- `handleRoomChat`: Broadcast a chat message to all users in the room.
+- `handleExit`: Remove a user from a room and notify others.
+- `handleDisconnect`: Handle unexpected socket disconnects and clean up user state.
+
+
+
+
 ### 🔨 Create Room
 
 ```json
@@ -92,6 +105,19 @@ Connect to `ws://localhost:5000` and send messages in the following JSON format:
     "name": "User Name"
   },
   "message": "Hello!"
+}
+```
+
+### 💬 Exit from group
+
+```json
+{
+  "type": "exit",
+  "roomId": "room-id",
+  "user": {
+    "id": "user-id",
+    "name": "User Name"
+  },
 }
 ```
 
