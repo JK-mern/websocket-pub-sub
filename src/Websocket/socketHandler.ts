@@ -3,6 +3,7 @@ import { Users } from "../types/users";
 import { RoomManager } from "../Rooms/RoomMangament";
 import { v4 as uuidv4 } from 'uuid'
 import type { WebSocket } from 'ws'
+import { userInfo } from "os";
 
 function joinRoom(roomId: string, user: Users, socket: WebSocket) {
     RoomManager.getInstance().insertUserToRoom(roomId, user, socket);
@@ -22,8 +23,34 @@ function handleRoomChat(roomId: string, user: Users, message: string) {
     RoomManager.getInstance().publishToRoom(roomId, `${user.name} : ${message}}`, user.id)
 }
 
+
+function handleExit(roomId : string, user:Users,)
+{
+    RoomManager.getInstance().removeUserFromRoom(roomId,user.id)
+    RoomManager.getInstance().publishToRoom(roomId,`${user.name} exited from group : `,user.id)
+}
+
+
+function handleDisconnect(ws : WebSocket)
+{
+    const userInfo = RoomManager.getInstance().getUserRoomBySocket(ws)
+
+    if(userInfo)
+    {
+        const {roomId,userId} = userInfo
+
+        const user = RoomManager.getInstance().getRoomUsers(roomId,userId)
+        if(user)
+        {
+             handleExit(roomId,user)
+        }
+    }
+}
+
 export const WebSocketHandler = {
     joinRoom,
     createRoom,
-    handleRoomChat
+    handleRoomChat,
+    handleExit,
+    handleDisconnect
 }

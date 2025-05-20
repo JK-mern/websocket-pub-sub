@@ -24,13 +24,20 @@ wss.on('connection' , (ws) =>{
             case 'join':
                     WebSocketHandler.joinRoom(data.roomId, data.user, ws)
                     break
-            case 'create' :
+            case 'create':
                  WebSocketHandler.createRoom(data.user,ws)
                  break
             case  'chat' :
                 WebSocketHandler.handleRoomChat(data.roomId, data.user, data.message)
                 break
+            case 'exit' :
+                WebSocketHandler.handleExit(data.roomId, data.user)
+                break
         }
+    })
+
+    ws.on('close', () =>{
+        WebSocketHandler.handleDisconnect(ws)
     })
 })
 

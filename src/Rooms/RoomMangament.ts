@@ -58,6 +58,25 @@ export class RoomManager {
     }
   }
 
+  handleUserDisconnect(ws:WebSocket)
+  {
+     
+  }
+
+  getUserRoomBySocket (ws:WebSocket)
+  {
+    for(const [roomId, userMap] of this.sockets.entries())
+    {
+      for(const[userId, socket] of userMap.entries())
+      {
+        if(socket ===ws)
+        {
+          return {roomId, userId}
+        }
+      }
+    }
+  }
+
   handleSubscriptionMessage(roomId: string, rawMessage: string) {
     const sockets = this.sockets.get(roomId);
     const { message, excludedUserId } = JSON.parse(rawMessage);
@@ -68,6 +87,12 @@ export class RoomManager {
         socket.send(message);
       }
     }
+  }
+
+
+  getRoomUsers (roomId : string, userId : string)
+  {
+    return this.rooms.get(roomId)?.find((user) => user.id === userId)
   }
 
   publishToRoom(roomId: string, message: string, excludedUserId?: string) {

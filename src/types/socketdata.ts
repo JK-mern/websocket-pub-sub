@@ -15,4 +15,10 @@ export type SocketDataType =
       roomId: string;
       user : Users
       message :string
-    };
+    }
+  |
+  {
+    type : "exit",
+    roomId : string,
+    user: Users
+  }
